@@ -27,7 +27,7 @@ enum layers {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_tenkey_27(
         KC_MUTE, KC_ESC, KC_DEL, KC_TAB, KC_BSPC,
-        MC_1,	 KC_NUM, KC_PSLS,KC_PAST,KC_PMNS,
+        KC_TAB,	 KC_NUM, KC_PSLS,KC_PAST,KC_PMNS,
         MC_2,	 KC_P7,	 KC_P8,	 KC_P9,	 KC_PPLS,
         MC_3,	 KC_P4,	 KC_P5,	 KC_P6,
         MO(L2),	 KC_P1,	 KC_P2,	 KC_P3,	 KC_PENT,
@@ -44,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [L2] = LAYOUT_tenkey_27(
         _______, _______, _______, _______, _______,
         _______, _______, _______, KC_GRV, KC_EQL,
-        _______, S(KC_9), KC_X, S(KC_0), _______,
+        S(KC_TAB), S(KC_9), KC_X, S(KC_0), _______,
         _______, KC_LCBR, KC_Y, KC_RCBR,
         _______, KC_LBRC, KC_Z, KC_RBRC, S(KC_PENT),
         _______, _______,          KC_PCMM          ),
@@ -69,7 +69,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 #endif // ENCODER_MAP_ENABLE
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    if (host_keyboard_led_state().num_lock) {
+    if (!host_keyboard_led_state().num_lock) {
         for (uint8_t i = led_min; i < led_max; i++) {
             if (true) {
                 rgb_matrix_set_color(i, RGB_RED);
