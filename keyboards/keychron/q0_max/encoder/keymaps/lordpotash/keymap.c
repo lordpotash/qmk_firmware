@@ -30,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         MC_1,	 KC_NUM, KC_PSLS,KC_PAST,KC_PMNS,
         MC_2,	 KC_P7,	 KC_P8,	 KC_P9,	 KC_PPLS,
         MC_3,	 KC_P4,	 KC_P5,	 KC_P6,
-        MC_4,	 KC_P1,	 KC_P2,	 KC_P3,	 KC_PENT,
+        MO(L2),	 KC_P1,	 KC_P2,	 KC_P3,	 KC_PENT,
         MO(FN),  KC_P0,          KC_PDOT         ),
 
     [FN] = LAYOUT_tenkey_27(
@@ -43,11 +43,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [L2] = LAYOUT_tenkey_27(
         _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______,
-        _______, _______, _______, _______,
-        _______, _______, _______, _______, _______,
-        _______, _______,          _______          ),
+        _______, _______, _______, KC_GRV, KC_EQL,
+        _______, S(KC_9), KC_X, S(KC_0), _______,
+        _______, KC_LCBR, KC_Y, KC_RCBR,
+        _______, KC_LBRC, KC_Z, KC_RBRC, S(KC_PENT),
+        _______, _______,          KC_PCMM          ),
 
     [L3] = LAYOUT_tenkey_27(
         _______, _______, _______, _______, _______,
