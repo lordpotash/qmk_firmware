@@ -26,12 +26,12 @@ enum layers {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_tenkey_27(
-        KC_MUTE, KC_ESC, KC_DEL, KC_TAB, KC_BSPC,
-        KC_TAB,	 KC_NUM, KC_PSLS,KC_PAST,KC_PMNS,
-        MC_2,	 KC_P7,	 KC_P8,	 KC_P9,	 KC_PPLS,
-        MC_3,	 KC_P4,	 KC_P5,	 KC_P6,
-        MO(L2),	 KC_P1,	 KC_P2,	 KC_P3,	 KC_PENT,
-        MO(FN),  KC_P0,          KC_PDOT         ),
+        KC_MUTE, KC_ESC,  KC_BSPC, KC_DEL,  KC_ESC,
+        KC_TAB,	 KC_NUM,  KC_PSLS, KC_PAST, KC_PMNS,
+        MC_2,	 KC_P7,	  KC_P8,   KC_P9,   KC_PPLS,
+        MC_3,	 KC_P4,   KC_P5,   KC_P6,
+        MO(L2),	 KC_P1,	  KC_P2,   KC_P3,   KC_PENT,
+        MO(FN),  KC_P0,            KC_PDOT         ),
 
     [FN] = LAYOUT_tenkey_27(
         RGB_TOG, BT_HST1, BT_HST2, BT_HST3, P2P4G,
@@ -43,11 +43,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [L2] = LAYOUT_tenkey_27(
         _______, _______, _______, _______, _______,
-        _______, _______, _______, KC_GRV, KC_EQL,
-        S(KC_TAB), S(KC_9), KC_X, S(KC_0), _______,
-        _______, KC_LCBR, KC_Y, KC_RCBR,
-        _______, KC_LBRC, KC_Z, KC_RBRC, S(KC_PENT),
-        _______, _______,          KC_PCMM          ),
+        _______, _______, _______, KC_CIRC, KC_EQL,
+        S(KC_TAB), KC_LPRN, KC_X,  KC_RPRN, _______,
+        _______, KC_LCBR, KC_Y,    KC_RCBR,
+        _______, KC_LBRC, KC_Z,    KC_RBRC, S(KC_PENT),
+        _______, _______,          KC_COMM           ),
 
     [L3] = LAYOUT_tenkey_27(
         _______, _______, _______, _______, _______,
