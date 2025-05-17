@@ -35,9 +35,12 @@
 #    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 32
 
 /* Caps lock indicating led */
-#    define CAPS_LOCK_INDEX 50
+//#    define CAPS_LOCK_INDEX 50
 
 #    define RGB_MATRIX_KEYPRESSES
 #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 
+/* Tap-Hold Configs*/
+#    define TAPPING_TERM 200
+#    define TAPPING_TERM_PER_KEY
 #endif
