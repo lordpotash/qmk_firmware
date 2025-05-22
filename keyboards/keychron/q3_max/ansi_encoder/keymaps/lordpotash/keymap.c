@@ -129,10 +129,10 @@ const uint8_t MAIN_KEYS[] = {
 };
 
 int clamp(int x, int lower, int upper) {
-  if(x > upper){
+  if(x > upper) {
     return upper;
   }
-  if(x < lower){
+  if(x < lower) {
     return lower;
   }
   return x;
@@ -180,7 +180,7 @@ const uint8_t MAIN_KEY_GROUPS[15][5] = {
  * or maintain the state of the LEDs
  */
 
- void update_cap_flood(void){
+ void update_cap_flood(void) {
   int flood_index = clamp(floor(caps_flood_position), 0, CAPS_FLOOD_STEPS);
 
   rgb_matrix_set_color(CAPS_LOCK_KEY_INDEX, RGB_RED);
