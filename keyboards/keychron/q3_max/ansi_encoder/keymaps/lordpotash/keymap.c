@@ -116,6 +116,19 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_MPLY_MNXT] = ACTION_TAP_DANCE_DOUBLE(KC_MPLY, KC_MNXT),
 };
 
+const key_override_t cole_undo_X-Z = ko_make_with_layers(KC_LCTL, KC_X, C(KC_Z), COL_BASE)
+const key_override_t cole_cut_C-X = ko_make_with_layers(KC_LCTL, KC_C, C(KC_X), COL_BASE)
+const key_override_t cole_copy_D-C = ko_make_with_layers(KC_LCTL, KC_D, C(KC_C), COL_BASE)
+const key_override_t cole_redo_R-Y = ko_make_with_layers(KC_LCTL, KC_, C(KC_Y), COL_BASE)
+
+// This globally defines all key overrides to be used
+const key_override_t *key_overrides[] = {
+	&cole_undo_X-Z
+  &cole_cut_C-X
+  &cole_copy_D-C
+  &cole_redo_R-Y
+};
+
 // caps lock wave
 
 // All these numbers match up with the indexed positions in the keymap above.
