@@ -116,17 +116,17 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_MPLY_MNXT] = ACTION_TAP_DANCE_DOUBLE(KC_MPLY, KC_MNXT),
 };
 
-const key_override_t cole_undo_XZ = ko_make_with_layers(KC_LCTL, KC_X, C(KC_Z), COL_BASE);
-const key_override_t cole_cut_CX  = ko_make_with_layers(KC_LCTL, KC_C, C(KC_X), COL_BASE);
-const key_override_t cole_copy_DC = ko_make_with_layers(KC_LCTL, KC_D, C(KC_C), COL_BASE);
-const key_override_t cole_redo_RY = ko_make_with_layers(KC_LCTL, KC_R, C(KC_Y), COL_BASE);
+const key_override_t cole_undo_XZ = ko_make_with_layers(MOD_MASK_CTRL, KC_X, C(KC_Z), 0b01000);
+const key_override_t cole_cut_CX  = ko_make_with_layers(MOD_MASK_CTRL, KC_C, C(KC_X), 0b01000);
+const key_override_t cole_copy_DC = ko_make_with_layers(MOD_MASK_CTRL, KC_D, C(KC_C), 0b01000);
+const key_override_t cole_redo_QY = ko_make_with_layers(MOD_MASK_CTRL, KC_Q, C(KC_Y), 0b01000);
 
 // This globally defines all key overrides to be used
 const key_override_t *key_overrides[] = {
 	&cole_undo_XZ,
   &cole_cut_CX,
   &cole_copy_DC,
-  &cole_redo_RY,
+  &cole_redo_QY,
 };
 
 // caps lock wave
