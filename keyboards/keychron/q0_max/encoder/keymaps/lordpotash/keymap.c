@@ -22,6 +22,8 @@ enum layers {
     FN,
     MAT,
     UNIT,
+    CTRL,
+//    TRNS,
 };
 
 enum custom_keycodes {
@@ -34,12 +36,12 @@ enum custom_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_tenkey_27(
-        KC_MUTE,  KC_ESC,  KC_BSPC, KC_DEL,  KC_ESC,
-        KC_TAB,	  KC_NUM,  KC_PSLS, KC_PAST, KC_PMNS,
-        MO(UNIT), KC_P7,   KC_P8,	KC_P9,	 KC_PPLS,
-        MO(FN),	  KC_P4,   KC_P5,	KC_P6,
-        MO(MAT),  KC_P1,   KC_P2,	KC_P3,	 LALT_T(KC_PENT),
-        KC_LCTL,  KC_P0,            KC_PDOT         ),
+        KC_MUTE,  KC_ESC,  KC_BSPC, KC_DEL,  TG(FN),
+        _______, KC_NUM,  KC_PSLS, KC_PAST, KC_PMNS,
+        MO(UNIT),  KC_P7,   KC_P8,	KC_P9,	 KC_PPLS,
+        KC_TAB,   KC_P4,   KC_P5,	KC_P6,
+        MO(CTRL), KC_P1,   KC_P2,	KC_P3,	 LALT_T(KC_PENT),
+        MO(MAT),  KC_P0,            LSFT_T(KC_PDOT)   ),
 
     [FN] = LAYOUT_tenkey_27(
         RGB_TOG,  BT_HST1,  BT_HST2,  BT_HST3, P2P4G,
@@ -54,16 +56,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______,  _______,  _______,  KC_EQL,
         S(KC_TAB),KC_LPRN,  KC_X,     KC_RPRN,  _______,
         _______,  KC_LCBR,  KC_Y,     KC_RCBR,
-        _______,  KC_LBRC,  KC_Z,     KC_RBRC,  S(KC_PENT),
+        _______,  KC_LBRC,  KC_Z,     KC_RBRC,  KC_PENT,
         _______,  _______,            KC_COMM          ),
 
     [UNIT] = LAYOUT_tenkey_27(
+        _______,  _______,  _______,  _______,  _______,
+        _______,  _______,  _______,  _______,  _______,
         _______,  TXT_MM,   TXT_CM,   TXT_IN,   TXT_FT,
+        _______,  _______,  _______,  _______,
+        _______,  _______,  _______,  _______,  _______,
+        _______,  _______,            _______          ),
+    
+    [CTRL] = LAYOUT_tenkey_27(
+        _______,  _______,  _______,  _______,  _______,
+        _______,  _______,  C(KC_S),  _______,  _______,
+        _______,  _______,  C(KC_W),  C(KC_R),  C(KC_T),
+        _______,  C(KC_A),  C(KC_E),  C(KC_F),
+        _______,  C(KC_Z),  C(KC_X),  C(KC_C),  C(KC_V),
+        _______,  _______,            C(KC_Y)             ),
+
+/*
+    [TRNS] = LAYOUT_tenkey_27(
+        _______,  _______,  _______,  _______,  _______,
         _______,  _______,  _______,  _______,  _______,
         _______,  _______,  _______,  _______,  _______,
         _______,  _______,  _______,  _______,
         _______,  _______,  _______,  _______,  _______,
         _______,  _______,            _______          ),
+*/
 };
 
 // clang-format on
@@ -71,8 +91,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [FN]   = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
-    [MAT]  = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [UNIT] = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
+    [MAT]  = {ENCODER_CCW_CW(_______,  _______)},
+    [UNIT] = {ENCODER_CCW_CW(_______,  _______)},
+    [CTRL]= {ENCODER_CCW_CW(_______,  _______)},
+//    [TRNS] = {ENCODER_CCW_CW(_______,  _______)},
 };
 #endif // ENCODER_MAP_ENABLE
 
