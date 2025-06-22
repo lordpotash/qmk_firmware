@@ -17,14 +17,12 @@
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
 #include "math.h"
-
 enum layers {
     MAC_BASE,
     MAC_FN,
     WIN_BASE,
-    COL_BASE,
     WIN_FN,
-//    NUMP,
+//    TRNS,
 };
 
 enum {
@@ -39,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,    KC_BSLS,    KC_DEL,   KC_END,   KC_PGDN,
         KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,              KC_ENT,
         KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,              KC_UP,
-        KC_LCTL,  KC_LOPTN, KC_LCMMD,                               KC_SPC,                                 KC_RCMMD, KC_ROPTN, MO(MAC_FN), KC_RCTL,    KC_LEFT,  KC_DOWN,  KC_RGHT),
+        KC_LCTL,  KC_LOPTN, KC_LCMMD,                               KC_SPC,                                 KC_RCMMD, MO(MAC_FN), KC_ROPTN, KC_RCTL,    KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [MAC_FN] = LAYOUT_tkl_ansi(
         _______,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,     RGB_TOG,    _______,  _______,  RGB_TOG,
@@ -50,37 +48,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______,  _______,                                _______,                                _______,  _______,  _______,    _______,    _______,  _______,  _______),
 
     [WIN_BASE] = LAYOUT_tkl_ansi(
-        KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,     TD(TD_MPLY_MNXT),    G(S(KC_S)),  C(S(A(KC_M))), RGB_MOD,
+        KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,     TD(TD_MPLY_MNXT),     G(S(KC_S)),  C(S(A(KC_M))), RGB_MOD,
         KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,     KC_BSPC,    KC_INS,   KC_HOME,  KC_PGUP,
         KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,    KC_BSLS,    KC_DEL,   KC_END,   KC_PGDN,
         KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,              KC_ENT,
         KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,              KC_UP,
         KC_LCTL,  KC_LCMD,  KC_LALT,                                KC_SPC,                                 KC_RALT,  MO(WIN_FN),  KC_RWIN, KC_RCTL,    KC_LEFT,  KC_DOWN,  KC_RGHT),
 
-    [COL_BASE] = LAYOUT_tkl_ansi(
-        KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,     TD(TD_MPLY_MNXT),    G(S(KC_S)),  C(S(A(KC_M))), RGB_MOD,
-        KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,     KC_BSPC,    KC_INS,   KC_HOME,  KC_PGUP,
-        KC_TAB,   KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     KC_J,     KC_L,     KC_U,     KC_Y,     KC_SCLN,  KC_LBRC,  KC_RBRC,    KC_BSLS,    KC_DEL,   KC_END,   KC_PGDN,
-        KC_CAPS,  KC_A,     KC_R,     KC_S,     KC_T,     KC_G,     KC_M,     KC_N,     KC_E,     KC_I,     KC_O,     KC_QUOT,              KC_ENT,
-        KC_LSFT,            KC_X,     KC_C,     KC_D,     KC_V,     KC_Z,     KC_K,     KC_H,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,              KC_UP,
-        KC_LCTL,  KC_LCMD,  KC_LALT,                                KC_SPC,                                 KC_RALT,  MO(WIN_FN),  KC_RWIN, KC_RCTL,    KC_LEFT,  KC_DOWN,  KC_RGHT),
-    
     [WIN_FN] = LAYOUT_tkl_ansi(
         _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,    RGB_TOG,    _______,  C(S(A(KC_D))),  RGB_TOG,
-        _______,  BT_HST1,  BT_HST2,  BT_HST3,  P2P4G,    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,    _______,  TO(WIN_BASE),  _______,
-        RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,    _______,  TO(COL_BASE),  _______,
+        _______,  BT_HST1,  BT_HST2,  BT_HST3,  P2P4G,    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,    _______,  _______,  _______,
+        RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,    _______,  _______,  _______,
         _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  _______,              _______,
         _______,            _______,  _______,  _______,  _______,  BAT_LVL,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,              _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,  _______,    _______,    _______,  _______,  _______),
-/*
-    [NUMP] = LAYOUT_tkl_ansi(
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,    _______,  _______,  _______,
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,    _______,  _______,  _______,
-        _______,  KC_1,     KC_2,     KC_3,     _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,    _______,  _______,  _______,
-        _______,  KC_4,     KC_5,     KC_6,     _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,              _______,
-        KC_0,               KC_7,     KC_8,     KC_9,     _______,  _______,  _______,  _______,  _______,  _______,  _______,              _______,              _______,
-        _______,  _______,  _______,                                _______,                                _______,  _______,  _______,    _______,    _______,  _______,  _______),
-*/
 /*
     [TRNS] = LAYOUT_tkl_ansi(
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,    _______,  _______,  _______,
@@ -98,9 +79,8 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [MAC_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [MAC_FN]   = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
     [WIN_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [COL_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [WIN_FN]   = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
-//    [NUMP] = {ENCODER_CCW_CW(_______, _______)},
+//    [TRNS] = {ENCODER_CCW_CW(_______, _______)},
 };
 #endif // ENCODER_MAP_ENABLE
 
@@ -116,29 +96,16 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_MPLY_MNXT] = ACTION_TAP_DANCE_DOUBLE(KC_MPLY, KC_MNXT),
 };
 
-const key_override_t cole_undo_XZ = ko_make_with_layers(MOD_MASK_CTRL, KC_X, C(KC_Z), 0b01000);
-const key_override_t cole_cut_CX  = ko_make_with_layers(MOD_MASK_CTRL, KC_C, C(KC_X), 0b01000);
-const key_override_t cole_copy_DC = ko_make_with_layers(MOD_MASK_CTRL, KC_D, C(KC_C), 0b01000);
-const key_override_t cole_redo_QY = ko_make_with_layers(MOD_MASK_CTRL, KC_Q, C(KC_Y), 0b01000);
-
-// This globally defines all key overrides to be used
-const key_override_t *key_overrides[] = {
-	&cole_undo_XZ,
-  &cole_cut_CX,
-  &cole_copy_DC,
-  &cole_redo_QY,
-};
-
 // caps lock wave
 
 // All these numbers match up with the indexed positions in the keymap above.
 const uint8_t CAPS_LOCK_KEY_INDEX = 50;
 const uint8_t MAIN_KEYS[] = { 
-  16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+  16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,  29,
    33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
-   50,  51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61,   62,
-    63,  64, 65, 66, 67, 68, 69, 70, 71, 72, 73,     74,
-  76, 77, 78,            79,               80, 81, 82, 83,
+    50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61,    62,
+     63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,       74,
+  76,  77,  78,          79,             80,  81,  82,  83,
 };
 
 int clamp(int x, int lower, int upper) {
@@ -230,7 +197,6 @@ double updateFloodPosition(double flood_position, double flood_amount, bool lock
   }
   return next_position;
 }
-
 
 // This is invoked once every cycle by the firmware and is used to set the Caps/Num/Scroll lock indicators
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
