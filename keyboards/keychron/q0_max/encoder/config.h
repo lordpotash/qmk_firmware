@@ -42,3 +42,7 @@
 #    define RGB_MATRIX_KEYPRESSES
 #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #endif
+
+/* Tap-Hold Configs*/
+#    define TAPPING_TERM 200
+#    define TAPPING_TERM_PER_KEY

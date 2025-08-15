@@ -33,10 +33,14 @@ enum custom_keycodes {
     TXT_FT,
 };
 
+enum {
+    TD_SAUD_MNXT,
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_tenkey_27(
-        KC_MUTE,  KC_ESC,   KC_BSPC,  KC_DEL,   _______,
+        TD(TD_SAUD_MNXT),  KC_ESC,   KC_BSPC,  KC_DEL,   G(S(KC_S)),
         TG(FN),   KC_NUM,   KC_PSLS,  KC_PAST,  KC_PMNS,
         MO(UNIT), KC_P7,    KC_P8,	  KC_P9,    KC_PPLS,
         KC_TAB,   KC_P4,    KC_P5,	  KC_P6,
@@ -44,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         MO(HOTK), KC_P0,              LSFT_T(KC_PDOT)    ),
 
     [FN] = LAYOUT_tenkey_27(
-        RGB_TOG,  BT_HST1,  BT_HST2,  BT_HST3,  P2P4G,
+        _______,  BT_HST1,  BT_HST2,  BT_HST3,  P2P4G,
         _______,  RGB_MOD,  RGB_VAI,  RGB_HUI,  KC_MPRV,
         _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  KC_MNXT,
         _______,  RGB_SAI,  RGB_SPI,  _______,
@@ -93,17 +97,30 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [FN]   = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
     [MAT]  = {ENCODER_CCW_CW(_______,  _______)},
     [UNIT] = {ENCODER_CCW_CW(_______,  _______)},
-    [HOTK]= {ENCODER_CCW_CW(_______,  _______)},
+    [HOTK] = {ENCODER_CCW_CW(_______,  _______)},
 //    [TRNS] = {ENCODER_CCW_CW(_______,  _______)},
 };
 #endif // ENCODER_MAP_ENABLE
 
+tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for MPLY, tap twice for MNXT
+    [TD_SAUD_MNXT] = ACTION_TAP_DANCE_DOUBLE(HYPR(KC_Q), KC_MNXT),
+};
+
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+
+    for (uint8_t i = 22; i < 26; i++) {
+        switch(get_highest_layer(layer_state|default_layer_state)) {
+            case 1:
+                rgb_matrix_set_color(i, RGB_BLUE);
+                break;
+            default:
+                break;
+        }
+    }
     if (!host_keyboard_led_state().num_lock) {
         for (uint8_t i = led_min; i < led_max; i++) {
-            if (true) {
-                rgb_matrix_set_color(i, RGB_RED);
-            }
+            rgb_matrix_set_color(i, RGB_RED);
         }
     }
     return false;
